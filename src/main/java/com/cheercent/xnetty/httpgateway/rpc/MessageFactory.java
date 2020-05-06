@@ -169,7 +169,7 @@ public class MessageFactory {
 
 	}
 	
-	static abstract class Message implements Serializable {
+	public static abstract class Message implements Serializable {
 		
 		private static final long serialVersionUID = 5413649977189007312L;
 		
