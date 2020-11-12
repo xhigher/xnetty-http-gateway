@@ -218,9 +218,7 @@ public class XHandler extends SimpleChannelInboundHandler<HttpObject> {
     }
     
     private static void sendError(ChannelHandlerContext ctx, HttpResponseStatus status) {
-    	ByteBuf errorInfo = Unpooled.copiedBuffer("Failure: " + status + "\r\n", CharsetUtil.UTF_8);
-        FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, status, errorInfo);
-        errorInfo.release();
+        FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, status, Unpooled.copiedBuffer("Failure: " + status + "\r\n", CharsetUtil.UTF_8));
         response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain; charset="+CharsetUtil.UTF_8.toString());
         ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
     }
